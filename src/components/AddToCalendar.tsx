@@ -1,18 +1,18 @@
 
 import React from 'react';
 import { Calendar } from 'lucide-react';
-import { createEvents } from 'ics';
+import { createEvents, DateArray } from 'ics';
 import { Button } from './ui/button';
 
 const AddToCalendar = () => {
   const handleAddToCalendar = () => {
     const event = {
-      start: [2025, 2, 28, 16, 0], // February 28, 2025, 4:00 PM
-      end: [2025, 2, 28, 22, 0],   // Assuming 6 hours duration
+      start: [2025, 2, 28, 16, 0] as DateArray,
+      end: [2025, 2, 28, 22, 0] as DateArray,
       title: 'A Night To Remember - Ritman University',
       description: 'Join us for an unforgettable evening of entertainment and celebration at Ritman Stadium. In collaboration with BELIEVERS\' LOVEWORLD UNIUYO.',
       location: 'RITMAN STADIUM',
-      organizer: { name: 'Students\' Union Government, Ritman University' }
+      organizer: { name: 'Students\' Union Government, Ritman University', email: '' }
     };
 
     createEvents([event], (error: Error | undefined, value: string) => {
