@@ -1,6 +1,7 @@
 
 import RegistrationForm from "@/components/RegistrationForm";
-import { CalendarDays, MapPin, Users } from "lucide-react";
+import AddToCalendar from "@/components/AddToCalendar";
+import { CalendarDays, MapPin } from "lucide-react";
 
 const Index = () => {
   return (
@@ -15,7 +16,7 @@ const Index = () => {
             A Night To
             <span className="block text-event-yellow mt-2">Remember</span>
           </h1>
-          <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base opacity-90">
+          <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base opacity-90 mb-6">
             <div className="flex items-center gap-2">
               <CalendarDays className="w-5 h-5" />
               <span>28th FEB, 2025 - 4PM PROMPT</span>
@@ -25,6 +26,7 @@ const Index = () => {
               <span>RITMAN STADIUM</span>
             </div>
           </div>
+          <AddToCalendar />
         </div>
 
         {/* Registration Section */}
