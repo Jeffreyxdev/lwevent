@@ -6,8 +6,8 @@ const EVENT_DETAILS = {
   title: "A Night To Remember",
   description: "Join us for an unforgettable event on February 28th!",
   location: "Ritman Stadium, Nigeria",
-  start: "20250228T190000Z",
-  end: "20250228T220000Z",
+  start: "20250228T150000Z",
+  end: "20250228T180000Z",
 };
 
 const AddToCalendar = () => {
