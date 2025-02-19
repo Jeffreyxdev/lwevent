@@ -1,41 +1,52 @@
-
 import React from 'react';
 import { Calendar } from 'lucide-react';
-import { createEvents, DateArray } from 'ics';
 import { Button } from './ui/button';
+
+const EVENT_DETAILS = {
+  title: "A Night To Remember",
+  description: "Join us for an unforgettable event on February 28th!",
+  location: "Ritman Stadium, Nigeria",
+  start: "20250228T190000Z",
+  end: "20250228T220000Z",
+};
 
 const AddToCalendar = () => {
   const handleAddToCalendar = () => {
-    const event = {
-      start: [2025, 2, 28, 16, 0] as DateArray,
-      end: [2025, 2, 28, 22, 0] as DateArray,
-      title: 'A Night To Remember - Ritman University',
-      description: 'Join us for an unforgettable evening of entertainment and celebration at Ritman Stadium. In collaboration with BELIEVERS\' LOVEWORLD UNIUYO.',
-      location: 'RITMAN STADIUM',
-      organizer: { name: 'Students\' Union Government, Ritman University', email: '' }
+    // Generate Google Calendar Event Link
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(EVENT_DETAILS.title)}&details=${encodeURIComponent(EVENT_DETAILS.description)}&location=${encodeURIComponent(EVENT_DETAILS.location)}&dates=${EVENT_DETAILS.start}/${EVENT_DETAILS.end}`;
+
+    // Generate and Download ICS File
+    const generateICSFile = () => {
+      const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${EVENT_DETAILS.title}
+DESCRIPTION:${EVENT_DETAILS.description}
+LOCATION:${EVENT_DETAILS.location}
+DTSTART:${EVENT_DETAILS.start}
+DTEND:${EVENT_DETAILS.end}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsContent], { type: "text/calendar" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "event.ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     };
 
-    createEvents([event], (error: Error | undefined, value: string) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
+    // Open Google Calendar Link
+    window.open(googleCalendarUrl, "_blank");
 
-      // Create a Blob from the .ics file content
-      const blob = new Blob([value], { type: 'text/calendar;charset=utf-8' });
-      
-      // Create a link element and trigger download
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', 'a-night-to-remember.ics');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    // Trigger ICS File Download
+    generateICSFile();
   };
 
   return (
-    <Button 
+    <Button
       onClick={handleAddToCalendar}
       variant="outline"
       className="bg-event-yellow/10 text-event-yellow hover:bg-event-yellow/20 border-event-yellow/20"
