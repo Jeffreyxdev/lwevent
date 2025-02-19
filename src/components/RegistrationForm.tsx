@@ -9,6 +9,8 @@ const RegistrationForm = () => {
     name: "",
     email: "",
     phone: "",
+    dep: "",
+    level: "",
   });
   const [registrants, setRegistrants] = useState(42); // Starting with a base number
 
@@ -20,7 +22,7 @@ const RegistrationForm = () => {
       description: "You're all set for A Night To Remember!",
       duration: 5000,
     });
-    setFormData({ name: "", email: "", phone: "" });
+    setFormData({ name: "", email: "", phone: "", dep:"", level:"" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +65,24 @@ const RegistrationForm = () => {
             value={formData.phone}
             onChange={handleChange}
             placeholder="Phone Number"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-event-purple focus:ring-2 focus:ring-event-purple-light outline-none transition-all"
+          />
+          <input
+            type="Dep"
+            name="Department"
+            value={formData.dep}
+            onChange={handleChange}
+            placeholder="Department"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-event-purple focus:ring-2 focus:ring-event-purple-light outline-none transition-all"
+          />
+          <input
+            type="Number"
+            name="Level"
+            value={formData.level}
+            onChange={handleChange}
+            placeholder="Level"
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-event-purple focus:ring-2 focus:ring-event-purple-light outline-none transition-all"
           />
